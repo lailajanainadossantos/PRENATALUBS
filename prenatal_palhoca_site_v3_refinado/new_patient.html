@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Nova paciente</title>
+<link rel="stylesheet" href="css/styles.css"/>
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap">
+    <div class="brand"><div class="brand-line"><img class="brand-logo" src="assets/logo_prefeitura_palhoca.png" alt="Palhoça"/><div class="brand-title">Pré-natal • Banco UBS</div></div>
+      <small id="subtitle">ESTADO DE SANTA CATARINA • PREFEITURA MUNICIPAL DE PALHOÇA • UBS RIO GRANDE</small>
+    </div>
+    <div class="search no-print"><input id="globalSearch" placeholder="Buscar paciente..."/></div>
+    <button class="btn primary no-print" id="btnNova">+ Nova paciente</button>
+  </div>
+</header>
+<main>
+<div class="grid cols2">
+<div class="card"><h2>Adicionar paciente</h2>
+<div class="field"><label>Nome completo (obrigatório)</label><input id="nome" placeholder="Nome completo"/></div>
+<hr class="sep"/><div class="row"><button class="btn primary" id="salvar">Salvar e abrir perfil</button><button class="btn" id="cancelar">Cancelar</button></div></div>
+<div class="card"><h2>Completar cadastro agora (opcional)</h2>
+<div class="field"><label>Data de nascimento</label><input id="dn" type="date"/></div>
+<div class="row"><div class="field" style="max-width:110px"><label>G</label><input id="g"/></div><div class="field" style="max-width:110px"><label>P</label><input id="p"/></div><div class="field" style="max-width:110px"><label>A</label><input id="a"/></div></div>
+<div class="field"><label>Risco</label><select id="risco"><option value="">—</option><option value="habitual">Habitual</option><option value="alto risco">Alto risco</option></select></div>
+<div class="field"><label>Histórico familiar</label><div class="row"><label class="chip"><input type="checkbox" id="hf_dm"/> DM</label><label class="chip"><input type="checkbox" id="hf_has"/> HAS</label><label class="chip"><input type="checkbox" id="hf_hipo"/> Hipotireoidismo</label></div></div>
+<div class="row"><div class="field" style="max-width:140px"><label>Tipo sanguíneo</label><select id="tipo"><option value="">—</option><option>A</option><option>B</option><option>AB</option><option>O</option></select></div>
+<div class="field" style="max-width:160px"><label>Rh</label><select id="rh"><option value="">—</option><option value="+">positivo</option><option value="-">negativo</option></select></div></div>
+<div class="field"><label>Referência da IG (padrão)</label><select id="ref"><option value="usg">USG</option><option value="dum">DUM</option></select></div>
+</div></div>
+</main>
+<script src="js/config.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/api.js"></script>
+<script src="js/new_patient.js"></script>
+<script>(function(){
+  var s=document.getElementById('subtitle');
+  if(s && window.APP_CONFIG){
+    var pref=(window.APP_CONFIG.PREFEITURA||'PREFEITURA MUNICIPAL DE PALHOÇA').toUpperCase();
+    var ubs=(window.APP_CONFIG.UBS_TITULO||'UBS RIO GRANDE').toUpperCase();
+    s.textContent='ESTADO DE SANTA CATARINA • '+pref+' • '+ubs;
+  }
+  var gs=document.getElementById('globalSearch');
+  var bn=document.getElementById('btnNova');
+  if(gs) gs.addEventListener('keydown', function(e){ if(e.key==='Enter') window.location.href='index.html?q='+encodeURIComponent(gs.value||''); });
+  if(bn) bn.addEventListener('click', function(){ window.location.href='new_patient.html'; });
+})();</script>
+</body></html>

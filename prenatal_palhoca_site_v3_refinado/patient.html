@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Perfil</title>
+<link rel="stylesheet" href="css/styles.css"/>
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap">
+    <div class="brand"><div class="brand-line"><img class="brand-logo" src="assets/logo_prefeitura_palhoca.png" alt="Palhoça"/><div class="brand-title">Pré-natal • Banco UBS</div></div>
+      <small id="subtitle">ESTADO DE SANTA CATARINA • PREFEITURA MUNICIPAL DE PALHOÇA • UBS RIO GRANDE</small>
+    </div>
+    <div class="search no-print"><input id="globalSearch" placeholder="Buscar paciente..."/></div>
+    <button class="btn primary no-print" id="btnNova">+ Nova paciente</button>
+  </div>
+</header>
+<main>
+<div class="card">
+<div class="row" style="justify-content:space-between;align-items:flex-start">
+<div><h2 id="pnome">Paciente</h2><div class="chips" id="pchips"></div></div>
+<div class="row no-print">
+<button class="btn" id="btnVoltar">Voltar</button>
+<button class="btn" id="btnEditar">Editar cadastro</button>
+<button class="btn primary" id="btnConsulta">Nova consulta</button>
+<button class="btn" id="btnExames">Modo exames</button>
+</div>
+</div>
+<hr class="sep"/>
+<div class="kpis">
+<div class="kpi"><div class="label">Referência IG</div><div class="val" id="kRef">—</div></div>
+<div class="kpi"><div class="label">IG atual</div><div class="val" id="kIG">—</div></div>
+<div class="kpi"><div class="label">Trimestre</div><div class="val" id="kTri">—</div></div>
+<div class="kpi"><div class="label">DPP</div><div class="val" id="kDPP">—</div></div>
+</div>
+<div style="margin-top:10px" class="timeline" id="timeline"><div class="bar"></div>
+<div class="tick" style="left:14px;transform:none">0s</div><div class="tick" style="left:50%">20s</div><div class="tick" style="left:calc(100% - 14px);transform:translateX(-100%)">40s</div>
+</div>
+<div class="muted" style="margin-top:8px">Marcadores = consultas registradas.</div>
+<hr class="sep"/>
+<h2>Histórico</h2>
+<table class="table" id="hist"><tbody></tbody></table>
+</div>
+</main>
+<script src="js/config.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/api.js"></script>
+<script src="js/patient.js"></script>
+<script>(function(){
+  var s=document.getElementById('subtitle');
+  if(s && window.APP_CONFIG){
+    var pref=(window.APP_CONFIG.PREFEITURA||'PREFEITURA MUNICIPAL DE PALHOÇA').toUpperCase();
+    var ubs=(window.APP_CONFIG.UBS_TITULO||'UBS RIO GRANDE').toUpperCase();
+    s.textContent='ESTADO DE SANTA CATARINA • '+pref+' • '+ubs;
+  }
+  var gs=document.getElementById('globalSearch');
+  var bn=document.getElementById('btnNova');
+  if(gs) gs.addEventListener('keydown', function(e){ if(e.key==='Enter') window.location.href='index.html?q='+encodeURIComponent(gs.value||''); });
+  if(bn) bn.addEventListener('click', function(){ window.location.href='new_patient.html'; });
+})();</script>
+</body></html>
