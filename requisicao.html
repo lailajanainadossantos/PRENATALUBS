@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Requisição A4</title>
+<link rel="stylesheet" href="css/styles.css"/>
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap">
+    <div class="brand"><div class="brand-line"><img class="brand-logo" src="assets/logo_prefeitura_palhoca.png" alt="Palhoça"/><div class="brand-title">Pré-natal • Banco UBS</div></div>
+      <small id="subtitle">ESTADO DE SANTA CATARINA • PREFEITURA MUNICIPAL DE PALHOÇA • UBS RIO GRANDE</small>
+    </div>
+    <div class="search no-print"><input id="globalSearch" placeholder="Buscar paciente..."/></div>
+    <button class="btn primary no-print" id="btnNova">+ Nova paciente</button>
+  </div>
+</header>
+<main>
+<div class="card">
+<div class="no-print row" style="justify-content:space-between;align-items:center">
+<div class="muted">Pré-visualização • A4</div>
+<div class="row"><button class="btn" id="voltar">Voltar</button><button class="btn" id="copiar">Copiar texto</button><button class="btn primary" id="imprimir">Imprimir / PDF</button></div>
+</div>
+<div class="requisicao" id="page">
+<div class="req-header"><img src="assets/logo_prefeitura_palhoca.png" alt="Prefeitura de Palhoça"/>
+<div class="inst"><div>ESTADO DE SANTA CATARINA</div><div id="inst2">PREFEITURA MUNICIPAL DE PALHOÇA</div><div id="inst3">SECRETARIA MUNICIPAL DE SAÚDE</div><div id="inst4">UBS RIO GRANDE</div></div></div>
+<div class="req-divider"></div>
+<div class="req-grid">
+<div class="req-line">PACIENTE: <span id="pNome">—</span></div>
+<div class="req-line">IDADE: <span id="pIdade">—</span></div>
+<div class="req-line">IG: <span id="pIG">—</span></div>
+<div class="req-line">DPP: <span id="pDPP">—</span></div>
+</div>
+<div class="req-title">SOLICITAÇÃO DE EXAMES</div>
+<div class="req-section" id="secLab" style="display:none"><h3>LABORATÓRIO</h3><ul id="labUl"></ul></div>
+<div class="req-section" id="secImg" style="display:none"><h3>IMAGEM</h3><ul id="imgUl"></ul></div>
+<div class="req-footer"><div class="req-line" id="localData">Palhoça, —</div>
+<div class="req-sign"><div class="line"></div><div class="name">Laila Janaina dos Santos</div><div class="crm">CRM 38237</div></div></div>
+</div></div>
+</main>
+<script src="js/config.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/api.js"></script>
+<script src="js/requisicao.js"></script>
+<script>(function(){
+  var s=document.getElementById('subtitle');
+  if(s && window.APP_CONFIG){
+    var pref=(window.APP_CONFIG.PREFEITURA||'PREFEITURA MUNICIPAL DE PALHOÇA').toUpperCase();
+    var ubs=(window.APP_CONFIG.UBS_TITULO||'UBS RIO GRANDE').toUpperCase();
+    s.textContent='ESTADO DE SANTA CATARINA • '+pref+' • '+ubs;
+  }
+  var gs=document.getElementById('globalSearch');
+  var bn=document.getElementById('btnNova');
+  if(gs) gs.addEventListener('keydown', function(e){ if(e.key==='Enter') window.location.href='index.html?q='+encodeURIComponent(gs.value||''); });
+  if(bn) bn.addEventListener('click', function(){ window.location.href='new_patient.html'; });
+})();</script>
+</body></html>

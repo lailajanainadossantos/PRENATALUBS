@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Modo exames</title>
+<link rel="stylesheet" href="css/styles.css"/>
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap">
+    <div class="brand"><div class="brand-line"><img class="brand-logo" src="assets/logo_prefeitura_palhoca.png" alt="Palhoça"/><div class="brand-title">Pré-natal • Banco UBS</div></div>
+      <small id="subtitle">ESTADO DE SANTA CATARINA • PREFEITURA MUNICIPAL DE PALHOÇA • UBS RIO GRANDE</small>
+    </div>
+    <div class="search no-print"><input id="globalSearch" placeholder="Buscar paciente..."/></div>
+    <button class="btn primary no-print" id="btnNova">+ Nova paciente</button>
+  </div>
+</header>
+<main>
+<div class="card"><h2 id="title">Modo exames</h2><div id="status" class="notice">Carregando…</div>
+<div class="kpis" style="margin-top:10px">
+<div class="kpi"><div class="label">IG</div><div class="val" id="kIG">—</div></div>
+<div class="kpi"><div class="label">Trimestre</div><div class="val" id="kTri">—</div></div>
+<div class="kpi"><div class="label">DPP</div><div class="val" id="kDPP">—</div></div>
+<div class="kpi"><div class="label">Fonte IG</div><div class="val" id="kRef">—</div></div>
+</div>
+<hr class="sep"/>
+<div class="tabs no-print"><button class="tab active" data-tab="lab">Laboratório</button><button class="tab" data-tab="img">Imagem</button></div>
+<div id="tabLab" style="margin-top:10px">
+<div class="card" style="padding:12px"><div class="row" style="justify-content:space-between"><div style="font-weight:900">Exames do trimestre</div><div class="chip" id="labTriLabel">—</div></div>
+<div id="labTriList" class="grid" style="margin-top:10px"></div></div>
+<div class="card" style="padding:12px;margin-top:10px"><div class="row" style="justify-content:space-between"><div style="font-weight:900">Outros exames laboratoriais</div><div class="muted">Seleção livre</div></div>
+<div id="labOtherList" class="grid" style="margin-top:10px"></div>
+<hr class="sep"/><div class="row"><div class="field"><label>Adicionar*</label><input id="labAdd"/></div><button class="btn" id="labAddBtn">Adicionar ao laboratório</button></div></div>
+</div>
+<div id="tabImg" style="margin-top:10px;display:none">
+<div class="card" style="padding:12px"><div style="font-weight:900">Imagem</div><div id="imgList" class="grid" style="margin-top:10px"></div>
+<hr class="sep"/><div class="row"><div class="field"><label>Adicionar*</label><input id="imgAdd"/></div><button class="btn" id="imgAddBtn">Adicionar à imagem</button></div></div>
+</div>
+<hr class="sep"/>
+<div class="row no-print" style="justify-content:space-between;align-items:center">
+<div class="row" style="gap:8px"><span class="muted" style="font-weight:900">Fonte:</span><button class="btn small" id="fontMinus">–</button><span class="chip" id="fontVal">12</span><button class="btn small" id="fontPlus">+</button></div>
+<div class="row"><button class="btn" id="voltar">Voltar</button><button class="btn" id="copiar">Copiar evolução (com exames)</button><button class="btn primary" id="gerar">Gerar requisição A4</button></div>
+</div></div>
+</main>
+<script src="js/config.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/api.js"></script>
+<script src="js/exams_catalog.js"></script><script src="js/exams.js"></script>
+<script>(function(){
+  var s=document.getElementById('subtitle');
+  if(s && window.APP_CONFIG){
+    var pref=(window.APP_CONFIG.PREFEITURA||'PREFEITURA MUNICIPAL DE PALHOÇA').toUpperCase();
+    var ubs=(window.APP_CONFIG.UBS_TITULO||'UBS RIO GRANDE').toUpperCase();
+    s.textContent='ESTADO DE SANTA CATARINA • '+pref+' • '+ubs;
+  }
+  var gs=document.getElementById('globalSearch');
+  var bn=document.getElementById('btnNova');
+  if(gs) gs.addEventListener('keydown', function(e){ if(e.key==='Enter') window.location.href='index.html?q='+encodeURIComponent(gs.value||''); });
+  if(bn) bn.addEventListener('click', function(){ window.location.href='new_patient.html'; });
+})();</script>
+</body></html>
