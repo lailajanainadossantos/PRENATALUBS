@@ -30,3 +30,6 @@ id | patientId | dataConsulta | dum | usgData | usgIG | peso | altura | imc | ha
 
 
 OBS: Regra do projeto — cálculos de IG/Trimestre/DPP exibidos no site e na requisição são sempre baseados na data de hoje (independente da data registrada da consulta).
+
+
+IMPORTANTE (GitHub Pages): este projeto usa JSONP para comunicar com o Apps Script e evitar bloqueio do navegador. Depois de colar o Code.gs acima, reimplante o Web App e use a mesma URL /exec no js/config.js.

@@ -1,15 +1,38 @@
-
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="pt-BR">
 <head>
-<meta charset="utf-8">
-<title>Pré-natal • Banco UBS</title>
-<link rel="stylesheet" href="css/styles.css">
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Banco de pacientes</title>
+<link rel="stylesheet" href="css/styles.css"/>
 </head>
 <body>
-<h1>Pré-natal • Banco UBS</h1>
-<p>Carregando pacientes automaticamente...</p>
+<header class="topbar">
+  <div class="wrap">
+    <div class="brand"><div class="brand-line"><img class="brand-logo" src="assets/logo_prefeitura_palhoca.png" alt="Palhoça"/><div class="brand-title">Pré-natal • Banco UBS</div></div>
+      <small id="subtitle">ESTADO DE SANTA CATARINA • PREFEITURA MUNICIPAL DE PALHOÇA • UBS RIO GRANDE</small>
+    </div>
+    <div class="search no-print"><input id="globalSearch" placeholder="Buscar paciente..."/></div>
+    <button class="btn primary no-print" id="btnNova">+ Nova paciente</button>
+  </div>
+</header>
+<main>
+<div class="card"><h2>Banco de pacientes</h2><div id="status" class="notice">Carregando…</div><table class="table" id="tbl"><tbody></tbody></table></div>
+<div class="card no-print"><h2>Configuração</h2><div class="notice">Edite <span class="chip">js/config.js</span> e cole a URL do Web App do Apps Script.</div></div>
+</main>
 <script src="js/config.js"></script>
+<script src="js/utils.js"></script>
 <script src="js/api.js"></script>
-</body>
-</html>
+<script src="js/index.js"></script>
+<script>(function(){
+  var s=document.getElementById('subtitle');
+  if(s && window.APP_CONFIG){
+    var pref=(window.APP_CONFIG.PREFEITURA||'PREFEITURA MUNICIPAL DE PALHOÇA').toUpperCase();
+    var ubs=(window.APP_CONFIG.UBS_TITULO||'UBS RIO GRANDE').toUpperCase();
+    s.textContent='ESTADO DE SANTA CATARINA • '+pref+' • '+ubs;
+  }
+  var gs=document.getElementById('globalSearch');
+  var bn=document.getElementById('btnNova');
+  if(gs) gs.addEventListener('keydown', function(e){ if(e.key==='Enter') window.location.href='index.html?q='+encodeURIComponent(gs.value||''); });
+  if(bn) bn.addEventListener('click', function(){ window.location.href='new_patient.html'; });
+})();</script>
+</body></html>
